@@ -1,9 +1,10 @@
 class Player
-  attr_accessor :choice_array, :picked_array
+  attr_accessor :choice_array, :picked_array, :guesses
 
   def initialize(secret_word)
     @choice_array = [].fill("-", 0, secret_word.length)
     @picked_array = []
+    @guesses = 10
   end    
 
   def print_player()
@@ -22,4 +23,9 @@ class Player
         end
     end
   end
+
+  def decrement_guess
+    @guesses -= 1
+  end
+
 end
