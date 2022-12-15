@@ -12,12 +12,25 @@ class Game
         @secret_word = SecretWord.new
         @secret_word.choose_word
         @player = Player.new(@secret_word.choice)
+        new_game
     end
 
-    def print()
-        @secret_word.choose_word
-        p @secret_word.choice
-        puts @secret_word.choice.length
+    def new_game()
+        puts "Enter '1' for new game or '2' to load a saved game!"
+        input = gets.chomp
+
+        if input == "1"
+            while check_win() == false
+                check_word
+            end
+            
+            puts "Congratulations! You have guessed the word correctly!"
+        elsif input == "2"
+            load_game
+        else
+            puts "The value you entered is neither '1' nor '2'. Please try again!"
+            new_game
+        end
     end
 
     def check_word()
@@ -46,6 +59,7 @@ class Game
               return false
             else
               puts "You have run out of guesses!"
+              puts "The secret word was '#{@secret_word.choice.upcase}'"
               exit
             end
         else
@@ -54,9 +68,4 @@ class Game
     end
 end
 
-test1 = Game.new
-while test1.check_win() == false
-    test1.check_word
-end
-
-puts "Congratulations! You have guessed the word correctly!"
+Game.new
