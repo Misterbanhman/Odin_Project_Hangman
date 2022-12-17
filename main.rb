@@ -1,10 +1,10 @@
 require 'yaml'
 require './player'
 require './secretword'
-# require './serialize'
+require './serialize'
 
 class Game
-    # include Serialize 
+    include Serialize 
 
     attr_accessor :player, :secret_word
 
@@ -27,6 +27,7 @@ class Game
             puts "Congratulations! You have guessed the word correctly!"
         elsif input == "2"
             load_game
+            new_game
         else
             puts "The value you entered is neither '1' nor '2'. Please try again!"
             new_game
@@ -36,6 +37,7 @@ class Game
     def check_word()
         #Prompts the user for a guess.
         puts "Please input a letter that you would like to guess!"
+        puts "If you would like to save the game state, please enter in 'save'"
         player_choice = gets.chomp.downcase
         puts "------------------------------------------"
 
@@ -46,6 +48,11 @@ class Game
             puts "\nYou still have #{@player.guesses} guesses!"
             puts "And you have already guessed these letters: #{player.picked_array}"
             puts "------------------------------------------"
+
+        elsif player_choice == 'save'
+            puts "Please input the name of the file you would like to save!"
+            filename = gets.chomp
+            to_yaml(filename)
         else
             puts "You have inputted an incorrect value that is not a letter. Please try again!"
             puts "\n"

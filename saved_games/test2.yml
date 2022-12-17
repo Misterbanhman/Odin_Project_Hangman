@@ -1,0 +1,18 @@
+---
+:secret_word_choice: depression
+:guesses: 7
+:player_guess_history:
+- a
+- d
+- e
+:player_current_array:
+- d
+- e
+- "-"
+- "-"
+- e
+- "-"
+- "-"
+- "-"
+- "-"
+- "-"
